@@ -70,7 +70,7 @@
                 <p class="text-center gameWordDisplay" >GAME ROUND #  <span id = "numberofround">0</span></p>
             </div>
             <div class="row gameWorldRow">
-                <div class="col-md-1 letterstyle" id = "letter_0">_</div>
+                <div class="col-md-1 letterstyle" id = "letter_0">A</div>
                 <div class="col-md-1 letterstyle" id = "letter_1">_</div>
                 <div class="col-md-1 letterstyle" id = "letter_2">_</div>
                 <div class="col-md-1 letterstyle" id = "letter_3">_</div>
@@ -85,13 +85,67 @@
             </div>
         </div>
 
+        <div class="row linebreak"></div>
+
+        <div class="row">
+            <div class="col-md-offset-1 col-md-5">
+                <img class = "imgDisplay" id = "img_id" src = "assets/images/hangman.jpg">
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="row linebreak"></div>
+                <div class="row linebreak"></div>
+                <div class="row linebreak"></div>
+
+                <div class="row btnrowbreak"></div>
+                <div class="row">
+                        <button id ="q" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">Q</button>
+                        <button id ="w" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">W</button>
+                        <button id ="e" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">E</button>
+                        <button id ="r" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">R</button>
+                        <button id ="t" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">T</button>
+                        <button id ="y" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">Y</button>
+                        <button id ="u" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">U</button>
+                        <button id ="i" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">I</button>
+                        <button id ="o" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">O</button>
+                        <button id ="p" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">P</button>
+                </div>
+
+                <div class="row btnrowbreak"></div>
+                <div class="row">
+                        <button id ="a" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">A</button>
+                        <button id ="s" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">S</button>
+                        <button id ="d" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">D</button>
+                        <button id ="f" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">F</button>
+                        <button id ="g" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">G</button>
+                        <button id ="h" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">H</button>
+                        <button id ="j" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">J</button>
+                        <button id ="k" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">K</button>
+                        <button id ="l" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">L</button>
+                </div>
+
+                <div class="row btnrowbreak"></div>
+                <div class="row">
+                        <button id ="z" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">Z</button>
+                        <button id ="x" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">X</button>
+                        <button id ="c" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">C</button>
+                        <button id ="v" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">V</button>
+                        <button id ="b" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">B</button>
+                        <button id ="n" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">N</button>
+                        <button id ="m" type="button" class="btn btn-secondary btn-lg btnLetter" onclick="btnfunction(this.id)">M</button>
+                </div>
+            </div>
+        </div>
+
 
     </section>
 
-    <footer class = "row">
-
-    </footer >
-
+    <footer class="footer">
+        <div class = "container">
+            <p class="text-muted" style = "text-align: center;">&copy Copyright 2018 Eric Jia</p>
+        </div>
+    </footer>
 
     <script scr = "assets/game.js">
         </script>

@@ -8,21 +8,42 @@
 }
 
 .gameenable {
-    padding-bottom: 1.5em;
+    padding-bottom: 1em;
     border-bottom: 3px solid #dddddd;
 }
 
 .gameWordDisplay {
     font-size: 2em;
-    padding-bottom: 1em;
+    padding-bottom: 0.5em;
 }
 
 .linebreak {
-    height:2em;
+    height:1.9em;
 }
 
 .letterstyle {
     border: 2px solid #dddddd;
     text-align: center;
-    font-size: 2em;
+    font-size: 3em;
+}
+
+.imgDisplay {
+    padding-top: 4em;
+    height: 23em;
+}
+
+.kbDisplay {
+    padding-top: 4em;
+}
+
+.kbRow2 {
+    padding-left: 2em;
+}
+
+.btnLetter {
+    width: 3em !important;
+}
+
+.btnrowbreak {
+    height:1em;
 }
