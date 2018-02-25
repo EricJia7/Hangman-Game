@@ -5,6 +5,15 @@
 .headingselector {
     font-size: 1.5em;
     text-align: center;
+    margin-top:1em;
+}
+
+#hiddenDisplay {
+    text-align: center;
+    font-size: 2em;
+    color: rgb(231, 19, 19);
+    font-weight: bold;
+
 }
 
 .gameenable {
@@ -29,7 +38,8 @@
 
 .imgDisplay {
     padding-top: 4em;
-    height: 23em;
+    width: 39em;
+
 }
 
 .kbDisplay {
@@ -46,4 +56,8 @@
 
 .btnrowbreak {
     height:1em;
+}
+
+.resultarea {
+    font-size: 2em;
 }
