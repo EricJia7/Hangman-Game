@@ -31,14 +31,15 @@
 }
 
 .letterstyle {
-    border: 2px solid #dddddd;
     text-align: center;
     font-size: 3em;
+    /* border-bottom: 2px dotted #dddddd; */
 }
 
 .imgDisplay {
     padding-top: 4em;
-    width: 39em;
+    width: 550px;
+    height: auto;
 
 }
 
