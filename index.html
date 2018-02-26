@@ -62,13 +62,13 @@
                 <p class = "headingselector text-uppercase ">START OR RESET GAME</p>
                 <div class="row">
                     <div class="col-md-offset-2 col-md-3">
-                        <button type="button" class="btn btn-success text-uppercase" onclick="startGame()">START</button>
+                        <button type="submit" class="btn btn-success text-uppercase" onclick="startGame()">START</button>
                     </div>
                     <div class="col-md-3">
-                            <button type="button" class="btn btn-danger text-uppercase" onclick="stopGame()">STOP</button>
+                            <button type="submit" class="btn btn-danger text-uppercase" onclick="stopGame()">STOP</button>
                     </div>
                     <div class="col-md-3">
-                            <button type="button" class="btn btn-warning text-uppercase" onclick="restartGame()">RESTART</button>
+                            <button type="reset" class="btn btn-warning text-uppercase" onclick="restartGame()">RESTART</button>
                     </div>
                 </div>
             </div>
@@ -82,18 +82,18 @@
                 <p class="text-center gameWordDisplay" >GAME ROUND #  <span id = "numberofround">0</span></p>
             </div>
             <div class="row gameWorldRow">
-                <div class="col-md-1 letterstyle" id = "letter_0"></div>
-                <div class="col-md-1 letterstyle" id = "letter_1"></div>
-                <div class="col-md-1 letterstyle" id = "letter_2"></div>
-                <div class="col-md-1 letterstyle" id = "letter_3"></div>
-                <div class="col-md-1 letterstyle" id = "letter_4"></div>
-                <div class="col-md-1 letterstyle" id = "letter_5"></div>
-                <div class="col-md-1 letterstyle" id = "letter_6"></div>
-                <div class="col-md-1 letterstyle" id = "letter_7"></div>
-                <div class="col-md-1 letterstyle" id = "letter_8"></div>
-                <div class="col-md-1 letterstyle" id = "letter_9"></div>
-                <div class="col-md-1 letterstyle" id = "letter_10"></div>
-                <div class="col-md-1 letterstyle" id = "letter_11"></div>
+                <div class="col-md-1 letterstyle text-uppercase" id = "letter_0"></div>
+                <div class="col-md-1 letterstyle text-uppercase" id = "letter_1"></div>
+                <div class="col-md-1 letterstyle text-uppercase" id = "letter_2"></div>
+                <div class="col-md-1 letterstyle text-uppercase" id = "letter_3"></div>
+                <div class="col-md-1 letterstyle text-uppercase" id = "letter_4"></div>
+                <div class="col-md-1 letterstyle text-uppercase" id = "letter_5"></div>
+                <div class="col-md-1 letterstyle text-uppercase" id = "letter_6"></div>
+                <div class="col-md-1 letterstyle text-uppercase" id = "letter_7"></div>
+                <div class="col-md-1 letterstyle text-uppercase" id = "letter_8"></div>
+                <div class="col-md-1 letterstyle text-uppercase" id = "letter_9"></div>
+                <div class="col-md-1 letterstyle text-uppercase" id = "letter_10"></div>
+                <div class="col-md-1 letterstyle text-uppercase" id = "letter_11"></div>
             </div>
         </div>
 
@@ -118,40 +118,40 @@
 
                 <div class="row btnrowbreak"></div>
                 <div class="row">
-                        <button id ="q" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">q</button>
-                        <button id ="w" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">w</button>
-                        <button id ="e" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">e</button>
-                        <button id ="r" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">r</button>
-                        <button id ="t" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">t</button>
-                        <button id ="y" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">y</button>
-                        <button id ="u" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">u</button>
-                        <button id ="i" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">i</button>
-                        <button id ="o" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">o</button>
-                        <button id ="p" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">p</button>
+                        <button id ="q" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">q</button>
+                        <button id ="w" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">w</button>
+                        <button id ="e" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">e</button>
+                        <button id ="r" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">r</button>
+                        <button id ="t" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">t</button>
+                        <button id ="y" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">y</button>
+                        <button id ="u" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">u</button>
+                        <button id ="i" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">i</button>
+                        <button id ="o" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">o</button>
+                        <button id ="p" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">p</button>
                 </div>
 
                 <div class="row btnrowbreak"></div>
                 <div class="row">
-                        <button id ="a" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">a</button>
-                        <button id ="s" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">s</button>
-                        <button id ="d" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">d</button>
-                        <button id ="f" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">f</button>
-                        <button id ="g" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">g</button>
-                        <button id ="h" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">h</button>
-                        <button id ="j" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">j</button>
-                        <button id ="k" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">k</button>
-                        <button id ="l" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">l</button>
+                        <button id ="a" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">a</button>
+                        <button id ="s" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">s</button>
+                        <button id ="d" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">d</button>
+                        <button id ="f" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">f</button>
+                        <button id ="g" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">g</button>
+                        <button id ="h" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">h</button>
+                        <button id ="j" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">j</button>
+                        <button id ="k" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">k</button>
+                        <button id ="l" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">l</button>
                 </div>
 
                 <div class="row btnrowbreak"></div>
                 <div class="row">
-                        <button id ="z" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">z</button>
-                        <button id ="x" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">x</button>
-                        <button id ="c" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">c</button>
-                        <button id ="v" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">v</button>
-                        <button id ="b" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">b</button>
-                        <button id ="n" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">n</button>
-                        <button id ="m" type="button" class="btn btn-secondary btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">m</button>
+                        <button id ="z" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">z</button>
+                        <button id ="x" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">x</button>
+                        <button id ="c" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">c</button>
+                        <button id ="v" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">v</button>
+                        <button id ="b" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">b</button>
+                        <button id ="n" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">n</button>
+                        <button id ="m" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">m</button>
                 </div>
             </div>
         </div>
@@ -200,6 +200,7 @@ var letterIdList = ["letter_0","letter_1","letter_2","letter_3","letter_4","lett
 
 // Player needs to pick Basic or Standard level frist before start the Game, otherwise display this alert message. 
 var notChooseHtml = "<p>choose basic or challenging first</p>";
+var notChooseHtml_2 = "<p>Choose basic or challenging first and then hit START"
 
 // Guess correct notice 
 var successNote = "<p>Congratulations You Made It</p>"
@@ -310,37 +311,40 @@ function startGame() {
     else if (levelSelected) {
             
         resultDisplay.innerHTML = nullHtml;
-            
-        currentImg.innerHTML = '<img class = "imgDisplay" src =" ' + hangmanimglist[imageIndex] +' "  alt="your pick display" />';
-
-        gameround++;
-        roundDisplay.textContent = gameround;
-
-        var num = word_pool.length;
-        var ramdnum = getRandomInt(num);
-        console.log(ramdnum);
-
-        wordOfGame = new word(word_pool[ramdnum]);
-        console.log(wordOfGame);
-
-        letternum = wordOfGame.wordlen;
-        console.log(letternum);
-
-        letterOfWord = wordOfGame.wordstr;
-        console.log(letterOfWord);
-
-        word_pool.splice(ramdnum,1);
-        console.log(word_pool);
-
-        for (var i = 0; i < letternum; i++) {
-            var dashDisplay = document.getElementById(letterIdList[i]);
-            dashDisplay.textContent = "_";
-        }
+        
+        gamerun();
     }
 }
 
+// initial the game
 function gamerun() {
 
+    currentImg.innerHTML = '<img class = "imgDisplay" src =" ' + hangmanimglist[imageIndex] +' "  alt="your pick display" />';
+
+    gameround++;
+
+    roundDisplay.textContent = gameround;
+
+    var num = word_pool.length;
+    var ramdnum = getRandomInt(num);
+    console.log(ramdnum);
+
+    wordOfGame = new word(word_pool[ramdnum]);
+    console.log(wordOfGame);
+
+    letternum = wordOfGame.wordlen;
+    console.log(letternum);
+
+    letterOfWord = wordOfGame.wordstr;
+    console.log(letterOfWord);
+
+    word_pool.splice(ramdnum,1);
+    console.log(word_pool);
+
+    for (var i = 0; i < letternum; i++) {
+        var dashDisplay = document.getElementById(letterIdList[i]);
+        dashDisplay.textContent = "_";
+        }
 }
 
 function nextgame() {
@@ -350,30 +354,43 @@ function nextgame() {
 // once game start, press key to check if it match with letters of word
 function btnfunction(clicked_id) {
 
-    if (wordOfGame.name.includes(clicked_id)) {
-        var position = [];
-        position = getLetterIndexes(wordOfGame.name,clicked_id);
-        correctNumLetter = correctNumLetter + position.length;
+    // Check if Basic/Challenge selected. 
+    if (!levelSelected) {
+        resultDisplay.innerHTML = notChooseHtml_2;
+        } 
 
-        console.log(position)
-        console.log(letterOfWord);
-        console.log("correct number total", + correctNumLetter);
+    // Check if Game start button has been pressed. 
 
-        for (var i=0; i<position.length;i++) {
-            var letterDisplay = document.getElementById(letterIdList[position[i]]);
-            console.log(position[i]);
-            letterDisplay.textContent = letterOfWord[position[i]];
+    else if (levelSelected && gameon) {
 
-            if (correctNumLetter === letternum) {
-                resultDisplay.innerHTML = successNote;
-                currentImg.innerHTML = '<img class = "imgDisplay" src =" ' + wordImgList[wordOfGame.name] +' "  alt="your pick display" />';
-                nextgame();
-            }
+        if (wordOfGame.name.includes(clicked_id)) {
+            var position = [];
+            position = getLetterIndexes(wordOfGame.name, clicked_id);
+            correctNumLetter = correctNumLetter + position.length;
+
+            console.log(position)
+            console.log(letterOfWord);
+            console.log("correct number total", + correctNumLetter);
+            
+            // Disable button that has string matches with the string list of word.
+            document.getElementById(clicked_id).disabled = true;
+
+            for (var i=0; i<position.length;i++) {
+                var letterDisplay = document.getElementById(letterIdList[position[i]]);
+                console.log(position[i]);
+                letterDisplay.textContent = letterOfWord[position[i]];
+
+                if (correctNumLetter === letternum) {
+                    resultDisplay.innerHTML = successNote;
+                    currentImg.innerHTML = '<img class = "imgDisplay" src =" ' + wordImgList[wordOfGame.name] +' "  alt="your pick display" />';
+                    nextgame();
+                    }
+                }
+            } else {
+                imageIndex ++;
+                currentImg.innerHTML = '<img class = "imgDisplay" src =" ' + hangmanimglist[imageIndex] +' "  alt="your pick display" />';
+                }
         }
-    } else {
-        imageIndex ++;
-        currentImg.innerHTML = '<img class = "imgDisplay" src =" ' + hangmanimglist[imageIndex] +' "  alt="your pick display" />';
-    }
 }
 
     
