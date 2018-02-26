@@ -26,6 +26,12 @@
     padding-bottom: 0.5em;
 }
 
+.winNumDisplay {
+    font-size: 1.5em;
+    padding-bottom: 0.5em;
+
+}
+
 .linebreak {
     height:1.9em;
 }

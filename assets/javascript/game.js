@@ -30,13 +30,16 @@ var letterIdList = ["letter_0","letter_1","letter_2","letter_3","letter_4","lett
 var notChooseHtml = "<p>choose basic or challenging first</p>";
 var notChooseHtml_2 = "<p>Choose basic or challenging first and then hit START"
 
+// Fail message and ask try again
+var failHtml = "<p>mission failed, try again!</p>"
+
 // Guess correct notice 
 var successNote = "<p>Congratulations You Made It</p>"
 
 // Disable notice display, nothing need to be alerted 
 var nullHtml = "<p></p>";
 
-//
+// How many guess can be made before fail
 var guessleft = 0;
 
 // the length of the word that is currently being guessed by Player. 
@@ -51,8 +54,11 @@ var wordOfGame = "";
 // once wordOfGame is identified, create a array to store all the letters of the wordOfGame in letterOfWord. 
 var letterOfWord = [];
 
-// Create index of the image for hangman progress step
+// Create index of the image for hangman progress step and it can also indicate how many guess left.
 var imageIndex = 0;
+
+// Key activiated list
+var keyActived = [];
 
 // Hangman progress image list
 var hangmanimglist = ["assets/images/Step_0.png","assets/images/Step_1.png","assets/images/Step_2.png","assets/images/Step_3.png","assets/images/Step_4.png","assets/images/Step_5.png","assets/images/Step_6.jpeg"];
@@ -108,22 +114,78 @@ function getLetterIndexes(arr, val) {
 function basic() {
     levelSelected = true;
     word_pool = word_basic;
+    document.getElementById("basicBtn").disabled = true;
+    document.getElementById("challengeBtn").disabled = true;
+
 }
 
 // challenge to assign challenge word pool to word_pool
 function challenge() {
     levelSelected = true;
     word_pool = word_challenge;
+    document.getElementById("challengeBtn").disabled = true;
+    document.getElementById("basicBtn").disabled = true;
 }
 
 //set gameon to false. 
 function stopGame() {
     gameon = false;
+    document.getElementById("restartBtn").disabled = false;
+}
+
+function resetKey() {
+    for (var i=0; i <keyActived.length; i++) {
+        document.getElementById(keyActived[i]).disabled = false;
+    }
+    keyActived = [];
+    console.log(wordOfGame);
+
 }
 
 function restartGame() {
-    gameon = true;
+
+    // reset the guessed letter and "_" unknown letter to null 
+    for (var i=0; i <letterOfWord.length; i++) {
+        document.getElementById('letter_' + i).textContent = "";
+    }
+
+    //reset all the varabiles 
+    letterOfWord = [];
     gameround = 0;
+    correctNumLetter = 0;
+    word_pool = [];
+    wordOfGame = "";
+    letternum = 0;
+    levelSelected = false;
+    imageIndex = 0;
+
+    roundDisplay.textContent = gameround;
+
+    //disable the reset button
+    document.getElementById("restartBtn").disabled = true;
+
+    //enable the start button 
+    document.getElementById("startBtn").disabled = false;
+
+    //enable basic and challenge button
+    document.getElementById("basicBtn").disabled = false;
+    document.getElementById("challengeBtn").disabled = false;
+
+    //reset the display image to default hangman game image
+    currentImg.innerHTML = '<img class = "imgDisplay"  src = "assets/images/hangman.jpg">'; 
+
+    //reset the notes display to null
+    resultDisplay.innerHTML = nullHtml;
+
+    //activate all the disable key
+    resetKey();
+
+    console.log("Game Round set to by restartgame " + gameround);
+    console.log(letterOfWord);
+    console.log("correct number total", + correctNumLetter);
+    console.log(wordOfGame);
+    console.log(letternum);
+    console.log(word_pool);
 }
 
 // start the game, initite all the parameters. 
@@ -132,6 +194,9 @@ function startGame() {
     gameon = true;
     // gameon && word_pool.length >= 1
     console.log("word pool lenght is:" + word_pool.length);
+    document.getElementById("restartBtn").disabled = false;
+    
+    resetKey();
 
     if (!levelSelected) {
         resultDisplay.innerHTML = notChooseHtml;
@@ -139,8 +204,8 @@ function startGame() {
     else if (levelSelected) {
             
         resultDisplay.innerHTML = nullHtml;
-        
         gamerun();
+        document.getElementById("startBtn").disabled = true;
     }
 }
 
@@ -192,6 +257,10 @@ function btnfunction(clicked_id) {
     else if (levelSelected && gameon) {
 
         if (wordOfGame.name.includes(clicked_id)) {
+
+            keyActived.push(clicked_id);
+            console.log("actived key list: " + keyActived);
+
             var position = [];
             position = getLetterIndexes(wordOfGame.name, clicked_id);
             correctNumLetter = correctNumLetter + position.length;
@@ -214,9 +283,20 @@ function btnfunction(clicked_id) {
                     nextgame();
                     }
                 }
-            } else {
+            } else { 
+
+                keyActived.push(clicked_id);
+                console.log("actived key list: " + keyActived);
+                
+                document.getElementById(clicked_id).disabled = true;
                 imageIndex ++;
                 currentImg.innerHTML = '<img class = "imgDisplay" src =" ' + hangmanimglist[imageIndex] +' "  alt="your pick display" />';
+
+                if (imageIndex >=6) {
+                    gameon = false;
+                    resultDisplay.innerHTML = failHtml;
+                }
+
                 }
         }
 }
