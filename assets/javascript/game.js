@@ -1,10 +1,10 @@
 // Basic words pool
-// var word_basic = ['tree', 'boat', 'human', 'baby', 'moon'];
-var word_basic = ['tree', 'moon'];
+var word_basic = ['tree', 'boat', 'human', 'baby', 'moon'];
+// var word_basic = ['tree', 'moon'];
 
 //challenging words pool
-var word_challenge = ['fortlee','metuchen'];
-// var word_challenge = ['fortlee','darkknight','mitsubishi','metuchen','philadelphia'];
+var word_challenge = ['fortlee','darkknight','mitsubishi','metuchen','philadelphia'];
+// var word_challenge = ['fortlee','metuchen'];
 
 //selection of words which will be used once Player start the game
 var word_pool = [];
@@ -155,6 +155,7 @@ function stopGame() {
     document.getElementById("restartBtn").disabled = false;
 }
 
+//enable all the keys after it was disabled during the game
 function resetKey() {
     for (var i=0; i <keyActived.length; i++) {
         document.getElementById(keyActived[i]).disabled = false;
@@ -162,16 +163,17 @@ function resetKey() {
     keyActived = [];
 }
 
+//display game round number
 function gameRoundDisplay() {
     roundDisplay.textContent = gameround;
 }
 
+//reset the notes display to null
 function noDisplay() {
-    //reset the notes display to null
     resultDisplay.innerHTML = nullHtml;
-
 }
 
+//reset game to play again
 function restartGame() {
 
     console.log("************* restartGame() Start****************")
@@ -224,22 +226,13 @@ function restartGame() {
     // Once all the keys are enabled, defaul the keyActive list to null.
     keyActived = [];
 
-    // Below is for testing restartGame() purpose, comment out as test is completed. 
-    // console.log("Game Round set to by restartgame " + gameround);
-    // console.log(letterOfWord);
-    // console.log("correct number total", + correctNumLetter);
-    // console.log(wordOfGame);
-    // console.log(letternum);
-    // console.log(word_pool);
-
     console.log("************* restartGame() End ****************")
-
 }
 
 // start the game, initite all the parameters. 
 function startGame() {
 
-    gameon = true;
+
     // gameon && word_pool.length >= 1
     console.log("word pool lenght is:" + word_pool.length);
     document.getElementById("restartBtn").disabled = false;
@@ -251,15 +244,16 @@ function startGame() {
         resultDisplay.innerHTML = notChooseHtml;
         } 
     else if (levelSelected) {
-            
         noDisplay();
         gamerun();
         document.getElementById("startBtn").disabled = true;
     }
 }
 
-// initial the game
+// initial the game by selecting the word for Play to guess
 function gamerun() {
+
+    gameon = true;
 
     currentImg.innerHTML = '<img class = "imgDisplay" src =" ' + hangmanimglist[imageIndex] +' "  alt="your pick display" />';
 
@@ -285,25 +279,18 @@ function gamerun() {
         var dashDisplay = document.getElementById(letterIdList[i]);
         dashDisplay.textContent = "_";
         }
-    
     gameround++;
     gameRoundDisplay();
 }
 
+// Once player get the word correctly or incorrectly, continue the game.
 function continueGame() {
-
     console.log("*************ContinueGame() Start****************")
-
     if (word_pool.length <= 0) {
         resultDisplay.innerHTML = guessCompleteHtml
 
     } else {
-        gameround++;
-        
-        gameRoundDisplay();
-        
         imageIndex = 0;
-        currentImg.innerHTML = '<img class = "imgDisplay" src =" ' + hangmanimglist[imageIndex] +' "  alt="your pick display" />';
 
         for (var i = 0; i < letternum; i++) {
             var dashDisplay = document.getElementById(letterIdList[i]);
@@ -311,41 +298,16 @@ function continueGame() {
             }
 
         resetKey();
-    
-        var num = word_pool.length;
-        var ramdnum = getRandomInt(num);
+        gamerun();
 
-        wordOfGame = new word(word_pool[ramdnum]);
-
-        //log current selected word string, need to add the word back to word_pool if guess failed 
-        wordOfGameName = wordOfGame.name;
-
-        console.log("Key Pressed List is: " + keyActived);
-        console.log("Current word to be guessed: " + wordOfGameName);
-             
-        letternum = wordOfGame.wordlen;
-        console.log("Current word's letter number sum is: " + letternum);
-
-        letterOfWord = wordOfGame.wordstr;
-        console.log("Current word's letter array is: " + letterOfWord);
-
-        word_pool.splice(ramdnum,1);
-        console.log("This is the word_pool after click the Continue Game Button: " + word_pool);
-
-        for (var i = 0; i < letternum; i++) {
-            var dashDisplay = document.getElementById(letterIdList[i]);
-            dashDisplay.textContent = "_";
-            }
         document.getElementById("continueBtn").disabled = true;
 
-        gameon = true;
         currentWordGuess = false;
         correctNumLetter = 0 ;
     }
-
     console.log("*************ContinueGame() Ends****************")
+}
 
- }
 
 // once game start, press key to check if it match with letters of word
 function btnfunction(clicked_id) {
@@ -418,7 +380,7 @@ function btnfunction(clicked_id) {
                     document.getElementById("continueBtn").disabled = false;
                 }
 
-                }
+            }
         }
         console.log("*************btnfunction() End****************")
 
