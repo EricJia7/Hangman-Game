@@ -23,6 +23,10 @@ var gameround = 0;
 // Display image according to current action, wrong guess or successful guess overall. 
 var currentImg = document.getElementById("img_id");
 
+// Display how may successful guess Play has win or lose
+var guessSuccessDisplay = document.getElementById("numberofwin");
+var guessFailedDisplay = document.getElementById("numberoflose");
+
 // This game can display up to 12 letters, words needs to be less or equal to 12 letters. 
 var letterIdList = ["letter_0","letter_1","letter_2","letter_3","letter_4","letter_5","letter_6","letter_7","letter_8","letter_9","letter_10","letter_11"];
 
@@ -39,17 +43,28 @@ var successNote = "<p>Congratulations You Made It</p>"
 // Disable notice display, nothing need to be alerted 
 var nullHtml = "<p></p>";
 
+//Guess all the word, Game ends
+var guessCompleteHtml = "<p>Congrats! You have clear all the words! GAME END....</p>"
+
 // How many guess can be made before fail
 var guessleft = 0;
 
+// Number of words Player guess successfully
+var guessSuccess = 0;
+var guessFailed = 0;
+
 // the length of the word that is currently being guessed by Player. 
 var correctNumLetter = 0;
+
+// Current word guess boolean, true if guess right, false if fail to guess after 6 steps. 
+var currentWordGuess = false;
 
 // the counts of specific letters for one specific word, e.g. count of 2 for letter of "e" in word of "tree"
 var letternum = 0;
 
 // once word_pool is identified or updated, use getRandomInt(num) to pick the word left in the word_pool and assign it to wordOfGame
 var wordOfGame = "";
+var wordofGameName = "";
 
 // once wordOfGame is identified, create a array to store all the letters of the wordOfGame in letterOfWord. 
 var letterOfWord = [];
@@ -72,7 +87,7 @@ var wordImgList = {
     "moon" : "assets/images/moon.jpg",
     "fortlee" : "assets/images/fortlee.jpg",
     "darkknight" : "assets/images/darkknight.jpg",
-    "mitsubishi" : "assets/images/mitsubishimoon.png",
+    "mitsubishi" : "assets/images/mitsubishi.png",
     "metuchen" : "assets/images/metuchen.jpg",
     "philadelphia" :"assets/images/philadelphia.jpg",
 };
@@ -158,6 +173,10 @@ function restartGame() {
     letternum = 0;
     levelSelected = false;
     imageIndex = 0;
+    keyActived = [];
+
+    guessSuccess = 0;
+    guessFailed = 0;
 
     roundDisplay.textContent = gameround;
 
@@ -177,15 +196,20 @@ function restartGame() {
     //reset the notes display to null
     resultDisplay.innerHTML = nullHtml;
 
+    //reset win or lose number display to 0
+    guessSuccessDisplay.textContent = guessSuccess;
+    guessFailedDisplay.textContent = guessFailed;
+
     //activate all the disable key
     resetKey();
 
-    console.log("Game Round set to by restartgame " + gameround);
-    console.log(letterOfWord);
-    console.log("correct number total", + correctNumLetter);
-    console.log(wordOfGame);
-    console.log(letternum);
-    console.log(word_pool);
+    // Below is for testing restartGame() purpose, comment out as test is completed. 
+    // console.log("Game Round set to by restartgame " + gameround);
+    // console.log(letterOfWord);
+    // console.log("correct number total", + correctNumLetter);
+    // console.log(wordOfGame);
+    // console.log(letternum);
+    // console.log(word_pool);
 }
 
 // start the game, initite all the parameters. 
@@ -195,6 +219,7 @@ function startGame() {
     // gameon && word_pool.length >= 1
     console.log("word pool lenght is:" + word_pool.length);
     document.getElementById("restartBtn").disabled = false;
+    document.getElementById("continueBtn").disabled = true;
     
     resetKey();
 
@@ -225,6 +250,9 @@ function gamerun() {
     wordOfGame = new word(word_pool[ramdnum]);
     console.log(wordOfGame);
 
+    //log current selected word string, need to add the word back to word_pool if guess failed 
+    wordOfGameName = wordOfGame.name;
+
     letternum = wordOfGame.wordlen;
     console.log(letternum);
 
@@ -240,9 +268,59 @@ function gamerun() {
         }
 }
 
-function nextgame() {
-    correctNumLetter = 0;
-}
+function continueGame() {
+
+    if (word_pool.length <= 0) {
+        resultDisplay.innerHTML = guessCompleteHtml
+
+    } else {
+        gameround++;
+        roundDisplay.textContent = gameround;
+    
+        imageIndex = 0;
+        currentImg.innerHTML = '<img class = "imgDisplay" src =" ' + hangmanimglist[imageIndex] +' "  alt="your pick display" />';
+
+        for (var i = 0; i < letternum; i++) {
+            var dashDisplay = document.getElementById(letterIdList[i]);
+            dashDisplay.textContent = "";
+            }
+
+        console.log("Hi~~~~ They keyactrived is ");
+        console.log(keyActived);
+
+        resetKey();
+    
+        var num = word_pool.length;
+        var ramdnum = getRandomInt(num);
+        console.log(ramdnum);
+
+        wordOfGame = new word(word_pool[ramdnum]);
+        console.log(wordOfGame);
+
+        //log current selected word string, need to add the word back to word_pool if guess failed 
+        wordOfGameName = wordOfGame.name;
+     
+        letternum = wordOfGame.wordlen;
+        console.log(letternum);
+
+        letterOfWord = wordOfGame.wordstr;
+        console.log(letterOfWord);
+
+        word_pool.splice(ramdnum,1);
+        console.log("This is the word_pool after click the Continue Game Button");
+        console.log(word_pool);
+
+        for (var i = 0; i < letternum; i++) {
+            var dashDisplay = document.getElementById(letterIdList[i]);
+            dashDisplay.textContent = "_";
+            }
+        document.getElementById("continueBtn").disabled = true;
+
+        gameon = true;
+        currentWordGuess = false;
+        correctNumLetter = 0 ;
+    }
+ }
 
 // once game start, press key to check if it match with letters of word
 function btnfunction(clicked_id) {
@@ -254,7 +332,7 @@ function btnfunction(clicked_id) {
 
     // Check if Game start button has been pressed. 
 
-    else if (levelSelected && gameon) {
+    else if (levelSelected && gameon && !currentWordGuess) {
 
         if (wordOfGame.name.includes(clicked_id)) {
 
@@ -278,9 +356,13 @@ function btnfunction(clicked_id) {
                 letterDisplay.textContent = letterOfWord[position[i]];
 
                 if (correctNumLetter === letternum) {
+                    guessSuccess++;
                     resultDisplay.innerHTML = successNote;
+                    guessSuccessDisplay.textContent = guessSuccess;
                     currentImg.innerHTML = '<img class = "imgDisplay" src =" ' + wordImgList[wordOfGame.name] +' "  alt="your pick display" />';
-                    nextgame();
+                    currentWordGuess = true;
+                    wordOfGameName = "";
+                    document.getElementById("continueBtn").disabled = false;
                     }
                 }
             } else { 
@@ -294,7 +376,13 @@ function btnfunction(clicked_id) {
 
                 if (imageIndex >=6) {
                     gameon = false;
+                    guessFailed++;
+                    guessFailedDisplay.textContent = guessFailed;
                     resultDisplay.innerHTML = failHtml;
+                    currentWordGuess = false;
+                    // add the current word back to current word_pool
+                    word_pool.push(wordOfGameName)
+                    document.getElementById("continueBtn").disabled = false;
                 }
 
                 }

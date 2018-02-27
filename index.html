@@ -68,7 +68,7 @@
                         <button type="submit" class="btn btn-danger text-uppercase" onclick="stopGame()" id = "stopBtn">STOP</button>
                     </div>
                     <div class="col-md-3">
-                        <button type="reset" class="btn btn-warning text-uppercase" onclick="restartGame()" id = "restartBtn">RESET</button>
+                        <button type="reset" class="btn btn-warning text-uppercase" onclick="restartGame()" id = "restartBtn">restart</button>
                     </div>
                 </div>
             </div>
@@ -182,10 +182,12 @@
     <script type="text/javascript" charset="UTF-8" scr = "assets/javascript/game.js" >
 
 // Basic words pool
-var word_basic = ['tree', 'boat', 'human', 'baby', 'moon'];
+// var word_basic = ['tree', 'boat', 'human', 'baby', 'moon'];
+var word_basic = ['tree', 'moon'];
 
 //challenging words pool
-var word_challenge = ['fortlee','darkknight','mitsubishi','metuchen','philadelphia'];
+var word_challenge = ['fortlee','metuchen'];
+// var word_challenge = ['fortlee','darkknight','mitsubishi','metuchen','philadelphia'];
 
 //selection of words which will be used once Player start the game
 var word_pool = [];
@@ -218,22 +220,24 @@ var notChooseHtml = "<p>choose basic or challenging first</p>";
 var notChooseHtml_2 = "<p>Choose basic or challenging first and then hit START"
 
 // Fail message and ask try again
-var failHtml = "<p>mission failed, try again!</p>"
+var failHtml = "<p>mission failed, click Continue totry again!</p>"
 
 // Guess correct notice 
-var successNote = "<p>Congratulations You Made It</p>"
+var successNote = "<p>Yes, You made it</p>"
 
 // Disable notice display, nothing need to be alerted 
 var nullHtml = "<p></p>";
 
 //Guess all the word, Game ends
-var guessCompleteHtml = "<p>Congrats! You have clear all the words! GAME END....</p>"
+var guessCompleteHtml = "<p>Well done and Congrats! Click Restart to replay....</p>"
 
 // How many guess can be made before fail
 var guessleft = 0;
 
 // Number of words Player guess successfully
 var guessSuccess = 0;
+
+// Number of words Player guess unsuccessfully
 var guessFailed = 0;
 
 // the length of the word that is currently being guessed by Player. 
@@ -311,7 +315,9 @@ function getLetterIndexes(arr, val) {
 // Basic to assign basic word pool to word_pool
 function basic() {
     levelSelected = true;
-    word_pool = word_basic;
+    console.log("Before select Basic, the basic word pool is: " + word_basic);
+    word_pool = word_basic.slice();
+    console.log("After select Basic, the word pool is updated to: " + word_pool);
     document.getElementById("basicBtn").disabled = true;
     document.getElementById("challengeBtn").disabled = true;
 
@@ -320,7 +326,8 @@ function basic() {
 // challenge to assign challenge word pool to word_pool
 function challenge() {
     levelSelected = true;
-    word_pool = word_challenge;
+    word_pool = word_challenge.slice();
+    console.log("After select challenge, the word pool is updated to: " + word_pool);
     document.getElementById("challengeBtn").disabled = true;
     document.getElementById("basicBtn").disabled = true;
 }
@@ -336,11 +343,21 @@ function resetKey() {
         document.getElementById(keyActived[i]).disabled = false;
     }
     keyActived = [];
-    console.log(wordOfGame);
+}
+
+function gameRoundDisplay() {
+    roundDisplay.textContent = gameround;
+}
+
+function noDisplay() {
+    //reset the notes display to null
+    resultDisplay.innerHTML = nullHtml;
 
 }
 
 function restartGame() {
+
+    console.log("************* restartGame() Start****************")
 
     // reset the guessed letter and "_" unknown letter to null 
     for (var i=0; i <letterOfWord.length; i++) {
@@ -356,12 +373,10 @@ function restartGame() {
     letternum = 0;
     levelSelected = false;
     imageIndex = 0;
-    keyActived = [];
-
     guessSuccess = 0;
     guessFailed = 0;
-
-    roundDisplay.textContent = gameround;
+    
+    gameRoundDisplay();
 
     //disable the reset button
     document.getElementById("restartBtn").disabled = true;
@@ -372,19 +387,24 @@ function restartGame() {
     //enable basic and challenge button
     document.getElementById("basicBtn").disabled = false;
     document.getElementById("challengeBtn").disabled = false;
+    document.getElementById("continueBtn").disabled = true;
 
     //reset the display image to default hangman game image
     currentImg.innerHTML = '<img class = "imgDisplay"  src = "assets/images/hangman.jpg">'; 
 
     //reset the notes display to null
-    resultDisplay.innerHTML = nullHtml;
+    noDisplay();
 
     //reset win or lose number display to 0
     guessSuccessDisplay.textContent = guessSuccess;
     guessFailedDisplay.textContent = guessFailed;
 
     //activate all the disable key
+    console.log("Key Pressed List is: " + keyActived);
     resetKey();
+
+    // Once all the keys are enabled, defaul the keyActive list to null.
+    keyActived = [];
 
     // Below is for testing restartGame() purpose, comment out as test is completed. 
     // console.log("Game Round set to by restartgame " + gameround);
@@ -393,6 +413,9 @@ function restartGame() {
     // console.log(wordOfGame);
     // console.log(letternum);
     // console.log(word_pool);
+
+    console.log("************* restartGame() End ****************")
+
 }
 
 // start the game, initite all the parameters. 
@@ -411,7 +434,7 @@ function startGame() {
         } 
     else if (levelSelected) {
             
-        resultDisplay.innerHTML = nullHtml;
+        noDisplay();
         gamerun();
         document.getElementById("startBtn").disabled = true;
     }
@@ -422,44 +445,45 @@ function gamerun() {
 
     currentImg.innerHTML = '<img class = "imgDisplay" src =" ' + hangmanimglist[imageIndex] +' "  alt="your pick display" />';
 
-    gameround++;
-
-    roundDisplay.textContent = gameround;
-
     var num = word_pool.length;
     var ramdnum = getRandomInt(num);
-    console.log(ramdnum);
 
     wordOfGame = new word(word_pool[ramdnum]);
-    console.log(wordOfGame);
 
     //log current selected word string, need to add the word back to word_pool if guess failed 
     wordOfGameName = wordOfGame.name;
+    console.log("Current word to be guessed: " + wordOfGameName);
 
     letternum = wordOfGame.wordlen;
-    console.log(letternum);
+    console.log("Current word's letter number sum is: " + letternum);
 
     letterOfWord = wordOfGame.wordstr;
-    console.log(letterOfWord);
+    console.log("Current word's letter array is: " + letterOfWord);
 
     word_pool.splice(ramdnum,1);
-    console.log(word_pool);
+    console.log("After letter selected, the word pool is updated to: " + word_pool);
 
     for (var i = 0; i < letternum; i++) {
         var dashDisplay = document.getElementById(letterIdList[i]);
         dashDisplay.textContent = "_";
         }
+    
+    gameround++;
+    gameRoundDisplay();
 }
 
 function continueGame() {
+
+    console.log("*************ContinueGame() Start****************")
 
     if (word_pool.length <= 0) {
         resultDisplay.innerHTML = guessCompleteHtml
 
     } else {
         gameround++;
-        roundDisplay.textContent = gameround;
-    
+        
+        gameRoundDisplay();
+        
         imageIndex = 0;
         currentImg.innerHTML = '<img class = "imgDisplay" src =" ' + hangmanimglist[imageIndex] +' "  alt="your pick display" />';
 
@@ -468,30 +492,27 @@ function continueGame() {
             dashDisplay.textContent = "";
             }
 
-        console.log("Hi~~~~ They keyactrived is ");
-        console.log(keyActived);
-
         resetKey();
     
         var num = word_pool.length;
         var ramdnum = getRandomInt(num);
-        console.log(ramdnum);
 
         wordOfGame = new word(word_pool[ramdnum]);
-        console.log(wordOfGame);
 
         //log current selected word string, need to add the word back to word_pool if guess failed 
         wordOfGameName = wordOfGame.name;
-     
+
+        console.log("Key Pressed List is: " + keyActived);
+        console.log("Current word to be guessed: " + wordOfGameName);
+             
         letternum = wordOfGame.wordlen;
-        console.log(letternum);
+        console.log("Current word's letter number sum is: " + letternum);
 
         letterOfWord = wordOfGame.wordstr;
-        console.log(letterOfWord);
+        console.log("Current word's letter array is: " + letterOfWord);
 
         word_pool.splice(ramdnum,1);
-        console.log("This is the word_pool after click the Continue Game Button");
-        console.log(word_pool);
+        console.log("This is the word_pool after click the Continue Game Button: " + word_pool);
 
         for (var i = 0; i < letternum; i++) {
             var dashDisplay = document.getElementById(letterIdList[i]);
@@ -503,6 +524,9 @@ function continueGame() {
         currentWordGuess = false;
         correctNumLetter = 0 ;
     }
+
+    console.log("*************ContinueGame() Ends****************")
+
  }
 
 // once game start, press key to check if it match with letters of word
@@ -520,38 +544,38 @@ function btnfunction(clicked_id) {
         if (wordOfGame.name.includes(clicked_id)) {
 
             keyActived.push(clicked_id);
-            console.log("actived key list: " + keyActived);
+            console.log("Key Pressed List is: " + keyActived);
 
             var position = [];
             position = getLetterIndexes(wordOfGame.name, clicked_id);
             correctNumLetter = correctNumLetter + position.length;
 
-            console.log(position)
-            console.log(letterOfWord);
-            console.log("correct number total", + correctNumLetter);
+            console.log("Pressed Keyin word Index:  " + position)
+            console.log("Current selected word is: " + letterOfWord);
+            console.log("Correct Number Guessed total: ", + correctNumLetter);
             
             // Disable button that has string matches with the string list of word.
             document.getElementById(clicked_id).disabled = true;
 
             for (var i=0; i<position.length;i++) {
                 var letterDisplay = document.getElementById(letterIdList[position[i]]);
-                console.log(position[i]);
                 letterDisplay.textContent = letterOfWord[position[i]];
-
-                if (correctNumLetter === letternum) {
-                    guessSuccess++;
-                    resultDisplay.innerHTML = successNote;
-                    guessSuccessDisplay.textContent = guessSuccess;
-                    currentImg.innerHTML = '<img class = "imgDisplay" src =" ' + wordImgList[wordOfGame.name] +' "  alt="your pick display" />';
-                    currentWordGuess = true;
-                    wordOfGameName = "";
-                    document.getElementById("continueBtn").disabled = false;
-                    }
                 }
+            
+            if (correctNumLetter === letternum) {
+                guessSuccess++;
+                resultDisplay.innerHTML = successNote;
+                guessSuccessDisplay.textContent = guessSuccess;
+                currentImg.innerHTML = '<img class = "imgDisplay" src =" ' + wordImgList[wordOfGame.name] +' "  alt="your pick display" />';
+                currentWordGuess = true;
+                wordOfGameName = "";
+                document.getElementById("continueBtn").disabled = false;
+                }
+
             } else { 
 
                 keyActived.push(clicked_id);
-                console.log("actived key list: " + keyActived);
+                console.log("Key Pressed List is: " + keyActived);
                 
                 document.getElementById(clicked_id).disabled = true;
                 imageIndex ++;
@@ -563,6 +587,7 @@ function btnfunction(clicked_id) {
                     guessFailedDisplay.textContent = guessFailed;
                     resultDisplay.innerHTML = failHtml;
                     currentWordGuess = false;
+
                     // add the current word back to current word_pool
                     word_pool.push(wordOfGameName)
                     document.getElementById("continueBtn").disabled = false;
