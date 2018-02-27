@@ -372,6 +372,7 @@ function restartGame() {
     wordOfGame = "";
     letternum = 0;
     levelSelected = false;
+    currentWordGuess = false;
     imageIndex = 0;
     guessSuccess = 0;
     guessFailed = 0;
@@ -532,14 +533,21 @@ function continueGame() {
 // once game start, press key to check if it match with letters of word
 function btnfunction(clicked_id) {
 
+    console.log("*************btnfunction() Start****************")
+    console.log("levelSelected now is : " + levelSelected);
+    console.log("gameon now is : " + gameon);
+    console.log("currentWordGuess now is : " + currentWordGuess);
+
     // Check if Basic/Challenge selected. 
     if (!levelSelected) {
         resultDisplay.innerHTML = notChooseHtml_2;
         } 
 
     // Check if Game start button has been pressed. 
-
     else if (levelSelected && gameon && !currentWordGuess) {
+
+        console.log("gamone: " + gameon);
+        console.log('currentWordGuess: ' + currentWordGuess)
 
         if (wordOfGame.name.includes(clicked_id)) {
 
@@ -595,6 +603,8 @@ function btnfunction(clicked_id) {
 
                 }
         }
+        console.log("*************btnfunction() End****************")
+
 }
 
     
