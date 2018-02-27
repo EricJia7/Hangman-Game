@@ -38,8 +38,8 @@
 
 .letterstyle {
     text-align: center;
-    font-size: 3em;
-    /* border-bottom: 2px dotted #dddddd; */
+    font-size: 4em;
+    margin-top: 1em;
 }
 
 .imgDisplay {
@@ -67,4 +67,8 @@
 
 .resultarea {
     font-size: 2em;
+}
+
+.resultDisplay {
+    background-color: darkseagreen;
 }
