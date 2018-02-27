@@ -125,7 +125,6 @@
 
                 <div class="row linebreak"></div>
                 <div class="row linebreak"></div>
-                <div class="row linebreak"></div>
 
                 <div class="row btnrowbreak"></div>
                 <div class="row">
@@ -163,6 +162,14 @@
                         <button id ="b" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">b</button>
                         <button id ="n" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">n</button>
                         <button id ="m" type="button kBDisable" class="btn btn-info btn-lg btnLetter text-uppercase" onclick="btnfunction(this.id)">m</button>
+                </div>
+                
+                <div class="row linebreak"></div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-left text-uppercase textLeftDisplay" >Steps Left #  <span id = "numberofguessleft">6</span></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -232,7 +239,8 @@ var nullHtml = "<p></p>";
 var guessCompleteHtml = "<p>Well done and Congrats! Click Restart to replay....</p>"
 
 // How many guess can be made before fail
-var guessleft = 0;
+var guessLeft = 6;
+var guessLeftDisplay = document.getElementById("numberofguessleft");
 
 // Number of words Player guess successfully
 var guessSuccess = 0;
@@ -351,6 +359,10 @@ function gameRoundDisplay() {
     roundDisplay.textContent = gameround;
 }
 
+function numberguessleft() {
+    guessLeftDisplay.textContent = guessLeft;
+}
+
 //reset the notes display to null
 function noDisplay() {
     resultDisplay.innerHTML = nullHtml;
@@ -409,6 +421,9 @@ function restartGame() {
     // Once all the keys are enabled, defaul the keyActive list to null.
     keyActived = [];
 
+    guessLeft = 6;
+    numberguessleft();
+
     console.log("************* restartGame() End ****************")
 }
 
@@ -431,6 +446,7 @@ function startGame() {
         gamerun();
         document.getElementById("startBtn").disabled = true;
     }
+
 }
 
 // initial the game by selecting the word for Play to guess
@@ -464,6 +480,10 @@ function gamerun() {
         }
     gameround++;
     gameRoundDisplay();
+    
+    guessLeft = 6;
+    numberguessleft();
+
 }
 
 // Once player get the word correctly or incorrectly, continue the game.
@@ -550,6 +570,9 @@ function btnfunction(clicked_id) {
                 document.getElementById(clicked_id).disabled = true;
                 imageIndex ++;
                 currentImg.innerHTML = '<img class = "imgDisplay" src =" ' + hangmanimglist[imageIndex] +' "  alt="your pick display" />';
+                
+                guessLeft--;
+                numberguessleft();
 
                 if (imageIndex >=6) {
                     gameon = false;
@@ -562,7 +585,6 @@ function btnfunction(clicked_id) {
                     word_pool.push(wordOfGameName)
                     document.getElementById("continueBtn").disabled = false;
                 }
-
             }
         }
         console.log("*************btnfunction() End****************")

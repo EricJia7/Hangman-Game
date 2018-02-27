@@ -26,6 +26,11 @@
     padding-bottom: 0.5em;
 }
 
+.textLeftDisplay {
+    font-size: 2.5em;
+    padding-top: 1em;
+}
+
 .winNumDisplay {
     font-size: 1.5em;
     padding-bottom: 0.5em;
