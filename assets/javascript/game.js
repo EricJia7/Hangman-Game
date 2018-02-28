@@ -191,15 +191,20 @@ function noDisplay() {
     resultDisplay.innerHTML = nullHtml;
 }
 
-// $(document).ready(function() {
-//     console.log("GuessBar Value is: " + guessBarVal[guessLeft.toString()]);
-//     $('#progressBar').css('width', guessBarVal[guessLeft.toString()]).attr('aria-valuenow', guessBarVal[guessLeft.toString()]);
-//     console.log("GuessBar Value change to: " + guessBarVal[guessLeft.toString()]);
-// })
-
+//display how many guess left for player
 function progressBarDisplay() {
     console.log("GuessBar Value is: " + guessBarVal[guessLeft.toString()]);
-    $('#progressBar').css('width', guessBarVal[guessLeft.toString()]).attr('aria-valuenow', guessBarVal[guessLeft.toString()]);
+
+    if (guessLeft <= 2) {
+        $('#progressBar').addClass('progress-bar-danger').removeClass('progress-bar-warning progress-bar-info');
+        $('#progressBar').css('width', guessBarVal[guessLeft.toString()]).attr('aria-valuenow', guessBarVal[guessLeft.toString()]);
+    } else if (guessLeft <= 4) {
+        $('#progressBar').addClass('progress-bar-warning').removeClass('progress-bar-danger progress-bar-info');
+        $('#progressBar').css('width', guessBarVal[guessLeft.toString()]).attr('aria-valuenow', guessBarVal[guessLeft.toString()]);
+    } else {
+        $('#progressBar').addClass('progress-bar-info').removeClass('progress-bar-warning progress-bar-danger');
+        $('#progressBar').css('width', guessBarVal[guessLeft.toString()]).attr('aria-valuenow', guessBarVal[guessLeft.toString()]);
+    }
     console.log("GuessBar Value change to: " + guessBarVal[guessLeft.toString()]);
 }
 
@@ -258,7 +263,6 @@ function restartGame() {
 
     guessLeft = 6;
     numberguessleft();
-
     progressBarDisplay();
 
     console.log("************* restartGame() End ****************")
@@ -320,6 +324,7 @@ function gamerun() {
     
     guessLeft = 6;
     numberguessleft();
+    progressBarDisplay();
 
 }
 
