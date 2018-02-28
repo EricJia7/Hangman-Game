@@ -1,3 +1,4 @@
+
 // Basic words pool
 var word_basic = ['tree', 'boat', 'human', 'baby', 'moon'];
 // var word_basic = ['tree', 'moon'];
@@ -49,7 +50,20 @@ var nullHtml = "<p></p>";
 var guessCompleteHtml = "<p>Well done and Congrats! Click Restart to replay....</p>"
 
 // How many guess can be made before fail
-var guessleft = 0;
+var guessLeft = 6;
+var guessLeftDisplay = document.getElementById("numberofguessleft");
+
+var guessBarVal = {
+    '6': "0%",
+    '5': "16.67%",
+    '4': "33.34%",
+    '3': "50%",
+    '2': "66.68%",
+    '1': "83.35%",
+    '0': "100%",
+};
+
+var guessBarDisplay = document.getElementById("progressBar");
 
 // Number of words Player guess successfully
 var guessSuccess = 0;
@@ -168,9 +182,25 @@ function gameRoundDisplay() {
     roundDisplay.textContent = gameround;
 }
 
+function numberguessleft() {
+    guessLeftDisplay.textContent = guessLeft;
+}
+
 //reset the notes display to null
 function noDisplay() {
     resultDisplay.innerHTML = nullHtml;
+}
+
+// $(document).ready(function() {
+//     console.log("GuessBar Value is: " + guessBarVal[guessLeft.toString()]);
+//     $('#progressBar').css('width', guessBarVal[guessLeft.toString()]).attr('aria-valuenow', guessBarVal[guessLeft.toString()]);
+//     console.log("GuessBar Value change to: " + guessBarVal[guessLeft.toString()]);
+// })
+
+function progressBarDisplay() {
+    console.log("GuessBar Value is: " + guessBarVal[guessLeft.toString()]);
+    $('#progressBar').css('width', guessBarVal[guessLeft.toString()]).attr('aria-valuenow', guessBarVal[guessLeft.toString()]);
+    console.log("GuessBar Value change to: " + guessBarVal[guessLeft.toString()]);
 }
 
 //reset game to play again
@@ -226,6 +256,11 @@ function restartGame() {
     // Once all the keys are enabled, defaul the keyActive list to null.
     keyActived = [];
 
+    guessLeft = 6;
+    numberguessleft();
+
+    progressBarDisplay();
+
     console.log("************* restartGame() End ****************")
 }
 
@@ -248,6 +283,7 @@ function startGame() {
         gamerun();
         document.getElementById("startBtn").disabled = true;
     }
+
 }
 
 // initial the game by selecting the word for Play to guess
@@ -281,6 +317,10 @@ function gamerun() {
         }
     gameround++;
     gameRoundDisplay();
+    
+    guessLeft = 6;
+    numberguessleft();
+
 }
 
 // Once player get the word correctly or incorrectly, continue the game.
@@ -299,6 +339,7 @@ function continueGame() {
 
         resetKey();
         gamerun();
+        progressBarDisplay();
 
         document.getElementById("continueBtn").disabled = true;
 
@@ -367,6 +408,11 @@ function btnfunction(clicked_id) {
                 document.getElementById(clicked_id).disabled = true;
                 imageIndex ++;
                 currentImg.innerHTML = '<img class = "imgDisplay" src =" ' + hangmanimglist[imageIndex] +' "  alt="your pick display" />';
+                
+                guessLeft--;
+                numberguessleft();
+
+                progressBarDisplay();
 
                 if (imageIndex >=6) {
                     gameon = false;
@@ -379,9 +425,8 @@ function btnfunction(clicked_id) {
                     word_pool.push(wordOfGameName)
                     document.getElementById("continueBtn").disabled = false;
                 }
-
             }
         }
         console.log("*************btnfunction() End****************")
-
 }
+
