@@ -34,20 +34,20 @@ var guessFailedDisplay = document.getElementById("numberoflose");
 var letterIdList = ["letter_0","letter_1","letter_2","letter_3","letter_4","letter_5","letter_6","letter_7","letter_8","letter_9","letter_10","letter_11"];
 
 // Player needs to pick Basic or Standard level frist before start the Game, otherwise display this alert message. 
-var notChooseHtml = "<p>choose basic or challenging first</p>";
-var notChooseHtml_2 = "<p>Choose basic or challenging first and then hit START"
+var notChooseHtml = "<p>choose level first</p>";
+var notChooseHtml_2 = "<p>Choose level first and START"
 
 // Fail message and ask try again
-var failHtml = "<p>mission failed, click Continue totry again!</p>"
+var failHtml = "<p>try again!</p>"
 
 // Guess correct notice 
-var successNote = "<p>Yes, You made it</p>"
+var successNote = "<p>Congrats</p>"
 
 // Disable notice display, nothing need to be alerted 
 var nullHtml = "<p></p>";
 
 //Guess all the word, Game ends
-var guessCompleteHtml = "<p>Well done and Congrats! Click Restart to replay....</p>"
+var guessCompleteHtml = "<p>Congrats! Click Restart to replay....</p>"
 
 // How many guess can be made before fail
 var guessLeft = 6;
@@ -196,16 +196,21 @@ function progressBarDisplay() {
     console.log("GuessBar Value is: " + guessBarVal[guessLeft.toString()]);
 
     if (guessLeft <= 2) {
-        $('#progressBar').addClass('progress-bar-danger').removeClass('progress-bar-warning progress-bar-info');
+        $('#progressBar').addClass('progress-bar-danger');
         $('#progressBar').css('width', guessBarVal[guessLeft.toString()]).attr('aria-valuenow', guessBarVal[guessLeft.toString()]);
     } else if (guessLeft <= 4) {
-        $('#progressBar').addClass('progress-bar-warning').removeClass('progress-bar-danger progress-bar-info');
+        $('#progressBar').addClass('progress-bar-warning');
         $('#progressBar').css('width', guessBarVal[guessLeft.toString()]).attr('aria-valuenow', guessBarVal[guessLeft.toString()]);
     } else {
-        $('#progressBar').addClass('progress-bar-info').removeClass('progress-bar-warning progress-bar-danger');
+        $('#progressBar').addClass('progress-bar-info');
         $('#progressBar').css('width', guessBarVal[guessLeft.toString()]).attr('aria-valuenow', guessBarVal[guessLeft.toString()]);
     }
     console.log("GuessBar Value change to: " + guessBarVal[guessLeft.toString()]);
+}
+
+function progressBarDisplayReset() {
+    $('#progressBar').removeClass('progress-bar-warning progress-bar-info progress-bar-danger');
+    $('#progressBar').css('width', guessBarVal[guessLeft.toString()]).attr('aria-valuenow', guessBarVal[guessLeft.toString()]);
 }
 
 //reset game to play again
@@ -263,7 +268,7 @@ function restartGame() {
 
     guessLeft = 6;
     numberguessleft();
-    progressBarDisplay();
+    progressBarDisplayReset()
 
     console.log("************* restartGame() End ****************")
 }
@@ -324,8 +329,7 @@ function gamerun() {
     
     guessLeft = 6;
     numberguessleft();
-    progressBarDisplay();
-
+    progressBarDisplayReset()
 }
 
 // Once player get the word correctly or incorrectly, continue the game.
@@ -341,10 +345,11 @@ function continueGame() {
             var dashDisplay = document.getElementById(letterIdList[i]);
             dashDisplay.textContent = "";
             }
-
+        
+        noDisplay()
         resetKey();
         gamerun();
-        progressBarDisplay();
+        progressBarDisplayReset()
 
         document.getElementById("continueBtn").disabled = true;
 
